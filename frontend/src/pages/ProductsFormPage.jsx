@@ -17,7 +17,9 @@ function ProductsFormPage() {
     defaultValues: {
       name: "",
       price: 0.0,
-      year: 2024,
+      quantity: 1,
+      color: "Azul", // Color predeterminado
+      sizes: ["S", "M", "L"], // Tamaños predeterminados
       image: uploadIcon,
     },
   });
@@ -40,7 +42,9 @@ function ProductsFormPage() {
         const product = await getProduct(params.id);
         setValue("name", product.name);
         setValue("price", product.price);
-        setValue("year", product.year);
+        setValue("quantity", product.quantity);
+        setValue("color", product.color);
+        setValue("sizes", product.sizes);
         setValue("image", product.image);
         setSelectedImage(server + product.image);
       }
@@ -53,9 +57,10 @@ function ProductsFormPage() {
     const formData = new FormData();
     formData.append("name", data.name); // Nombre del producto
     formData.append("price", data.price); // Precio del producto
-    formData.append("year", data.year); // Año del producto
-    formData.append("image", data.image); // Archivo de imagen del producto
-
+    formData.append("quantity", data.quantity); // Cantidad del producto
+    formData.append("color", data.color); // Color del producto
+    formData.append("sizes", data.sizes); // Tamaños seleccionados
+    formData.append("image", data.image); // Imagen del producto
     try {
       if (params.id) {
         // Si hay un parámetro en la URL actualiza
@@ -64,8 +69,10 @@ function ProductsFormPage() {
           const updateData = {
             name: data.name,
             price: data.price.toString(),
-            year: data.year.toString(),
+            quantity: data.quantity.toString(),
+            color: data.color,
             image: data.image,
+            sizes: data.sizes.toString([]),
           };
           await updateProductNoUpdateImage(params.id, updateData); // Espera la actualización
         } else {
@@ -80,6 +87,7 @@ function ProductsFormPage() {
       console.error("Error al procesar el producto:", error);
     }
   });
+
   const handleImageClick = () => {
     inputImage.current.click();
   };
@@ -95,6 +103,7 @@ function ProductsFormPage() {
     <div className="bg-zinc-800 max-w-md w-full p-10 rounded-md">
       <form onSubmit={onSubmit}>
         <h1 className="text-3xl font-bold my-2">Productos</h1>
+
         <label htmlFor="name">Nombre</label>
         <input
           type="text"
@@ -123,23 +132,47 @@ function ProductsFormPage() {
           <div className="text-red-500">{errors.price.message}</div>
         )}
 
-        <label htmlFor="year">Año</label>
+        <label htmlFor="quantity">Cantidad</label>
         <input
           type="number"
-          max={new Date().getFullYear()}
-          min="1900"
-          step="1"
           className="w-full bg-zinc-700 text-white px-4 py-2 rounded-md my-2"
-          placeholder="Año del producto"
-          {...register("year", {
-            required: "El año es requerido",
-            min: { value: 1900, message: "El año mínimo es 1900" },
-
+          placeholder="Cantidad"
+          {...register("quantity", {
+            required: "La cantidad es requerida",
             valueAsNumber: true,
           })}
         />
-        {errors.year && (
-          <div className="text-red-500">{errors.year.message}</div>
+        {errors.quantity && (
+          <div className="text-red-500">{errors.quantity.message}</div>
+        )}
+
+        <label htmlFor="color">Color</label>
+        <select
+          className="w-full bg-zinc-700 text-white px-4 py-2 rounded-md my-2"
+          {...register("color", { required: "El color es requerido" })}
+        >
+          <option value="Azul">Azul</option>
+          <option value="Rojo">Rojo</option>
+          <option value="Verde">Verde</option>
+          <option value="Negro">Negro</option>
+        </select>
+        {errors.color && (
+          <div className="text-red-500">{errors.color.message}</div>
+        )}
+
+        <label htmlFor="sizes">Tamaños</label>
+        <div className="flex gap-2">
+          {["S", "M", "L"].map((size) => (
+            <div key={size}>
+              <label>
+                <input type="checkbox" value={size} {...register("sizes")} />
+                {size}
+              </label>
+            </div>
+          ))}
+        </div>
+        {errors.sizes && (
+          <div className="text-red-500">{errors.sizes.message}</div>
         )}
 
         <div className="py-2 my-2">
