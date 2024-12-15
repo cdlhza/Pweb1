@@ -2,57 +2,130 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Estilos globales */
 body {
-  background: #001823;
-  color: rgb(255, 255, 255);
+  background: #0d0d0d;
+  /* Fondo oscuro para ambiente inmersivo */
+  color: #e6e6e6;
+  /* Texto claro para contraste */
+  font-family: 'Orbitron', sans-serif;
+  /* Fuente futurista */
 }
 
+/* Contenedores principales */
 .container {
-  -webkit-backdrop-filter: blur(20px);
   backdrop-filter: blur(20px);
-  border-radius: 40px;
-  position: relative;
-  z-index: 10;
-  max-width: 1400px;
-  border-bottom: 3px solid rgba(255, 255, 255, 0.145);
-  border-left: 3px solid rgba(255, 255, 255, 0.145);
-  border-right: 3px solid rgba(255, 255, 255, 0.145);
+  -webkit-backdrop-filter: blur(20px);
+  border-radius: 20px;
+  border: 2px solid rgba(0, 255, 255, 0.2);
+  background: rgba(0, 0, 0, 0.8);
+  overflow: hidden;
+  transition: transform 0.3s, box-shadow 0.3s;
 }
 
 .container:hover {
-  transform: scale(1.05);
-  transition: transform 0.3s ease-in-out;
-  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.3);
+  transform: scale(1.03);
+  box-shadow: 0 0 30px rgba(0, 255, 255, 0.4);
 }
 
-.input-field {
-  width: 100%;
-  padding: 10px;
-  border-radius: 10px;
-  background-color: rgba(0, 0, 0, 0.3);
-  color: #ffffff;
-  font-size: 18px;
-}
-
-.input-field:focus {
-  background-color: rgba(0, 0, 0, 0.5);
-  outline: none;
-  border: 2px solid #ffffff;
-}
-
+/* Botones primarios */
 .btn-primary {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #cc2b5e;
-  color: white;
-  padding: 10px 15px;
+  background: linear-gradient(90deg, #cc2b5e, #753a88);
+  color: #ffffff;
+  padding: 12px 24px;
   border-radius: 8px;
-  font-size: 18px;
   font-weight: bold;
-  transition: background-color 0.3s ease-in-out;
+  text-transform: uppercase;
+  transition: background 0.3s ease, transform 0.2s ease;
 }
 
 .btn-primary:hover {
-  background-color: #753a88;
+  background: linear-gradient(90deg, #753a88, #cc2b5e);
+  transform: translateY(-3px);
+}
+
+/* Campos de entrada */
+.input-field {
+  width: 100%;
+  padding: 12px;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #ffffff;
+  font-size: 16px;
+  transition: background-color 0.3s ease, border 0.3s ease;
+}
+
+.input-field:focus {
+  background-color: rgba(255, 255, 255, 0.2);
+  border: 1px solid #00ffff;
+  outline: none;
+}
+
+/* Títulos */
+h1,
+h2,
+h3 {
+  font-family: 'Orbitron', sans-serif;
+  letter-spacing: 2px;
+  color: #ffde00;
+}
+
+h1 {
+  font-size: 3rem;
+}
+
+h2 {
+  font-size: 2rem;
+}
+
+/* Imágenes destacadas */
+.img-container {
+  position: relative;
+  overflow: hidden;
+  border: 2px solid rgba(0, 255, 255, 0.2);
+  border-radius: 16px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.img-container img {
+  width: 100%;
+  height: auto;
+  transition: transform 0.5s ease;
+}
+
+.img-container:hover img {
+  transform: scale(1.1);
+}
+
+/* Links */
+a {
+  color: #00ffff;
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+a:hover {
+  color: #ffde00;
+}
+
+/* Footer */
+footer {
+  background: #1a1a1a;
+  border-top: 2px solid #ffde00;
+  padding: 20px;
+  text-align: center;
+  font-size: 0.9rem;
+  color: #e6e6e6;
+}
+
+footer a {
+  color: #00ffff;
+}
+
+footer a:hover {
+  color: #ffde00;
 }

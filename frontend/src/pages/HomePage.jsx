@@ -1,103 +1,105 @@
 function HomePage() {
   return (
-    <div className="bg-gray-100 text-gray-600">
-      {/* Banner principal */}
-      <div
-        className="bg-gray-800 bg-cover bg-center h-96"
-        style={{ backgroundImage: "url('/assets/banner.jpg')" }}
+    <div className="bg-black text-gray-300 min-h-screen">
+      {/* Encabezado principal */}
+      <header
+        className="relative bg-cover bg-center h-screen border-b-4 border-yellow-500"
+        style={{ backgroundImage: "url('/assets/cyberpunk-banner.jpg')" }}
       >
-        <div className="bg-gray-800 bg-opacity-50 h-full flex items-center justify-center">
-          <h1 className="text-4xl md:text-6xl font-bold text-white text-center">
-            Bienvenidos a nuestra Tienda de Ropa
-            <br />
-            <span className="text-yellow-500">¡Explora nuestras ofertas!</span>
+        <div className="absolute inset-0 bg-gradient-to-b from-black via-transparent to-black opacity-90"></div>
+        <div className="relative z-10 flex flex-col items-center justify-center h-full text-center">
+          <h1 className="text-6xl md:text-8xl font-bold text-yellow-500 mb-4">
+            Bienvenido al Futuro
           </h1>
+          <p className="text-2xl text-cyan-400">
+            Explora un nuevo mundo de posibilidades
+          </p>
         </div>
-      </div>
+      </header>
 
-      {/* Categorías */}
-      <section className="py-8 px-4">
-        <h2 className="text-2xl font-bold text-center mb-6">Categorías</h2>
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
-          <div className="bg-white rounded-lg shadow-lg hover:shadow-2xl p-4 text-center">
+      {/* Contenedores principales */}
+      <main className="py-16 px-8">
+        {/* Contenedor horizontal para imagen destacada */}
+        <section className="relative mb-16">
+          <div className="h-72 bg-gray-800 border border-cyan-400 rounded-lg overflow-hidden">
             <img
-              src="/assets/hombres.jpg"
-              alt="Hombres"
-              className="w-full h-48 object-cover rounded-t-lg"
+              src="/assets/cyberpunk-wide.jpg"
+              alt="Destacado"
+              className="w-full h-full object-cover"
             />
-            <h3 className="mt-4 text-lg font-semibold">Hombres</h3>
-            <p>Ropa y accesorios para él</p>
           </div>
-          <div className="bg-white rounded-lg shadow-lg hover:shadow-2xl p-4 text-center">
-            <img
-              src="/assets/mujeres.jpg"
-              alt="Mujeres"
-              className="w-full h-48 object-cover rounded-t-lg"
-            />
-            <h3 className="mt-4 text-lg font-semibold">Mujeres</h3>
-            <p>Ropa y accesorios para ella</p>
-          </div>
-          <div className="bg-white rounded-lg shadow-lg hover:shadow-2xl p-4 text-center">
-            <img
-              src="/assets/unisex.jpg"
-              alt="Unisex"
-              className="w-full h-48 object-cover rounded-t-lg"
-            />
-            <h3 className="mt-4 text-lg font-semibold">Unisex</h3>
-            <p>Estilo para todos</p>
-          </div>
-        </div>
-      </section>
+        </section>
 
-      {/* Productos destacados */}
-      <section className="bg-white py-8 px-4">
-        <h2 className="text-2xl font-bold text-center mb-6">
-          Productos destacados
-        </h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {/* Producto 1 */}
-          <div className="bg-gray-100 rounded-lg shadow-lg hover:shadow-2xl p-4 text-center">
-            <img
-              src="/assets/producto1.jpg"
-              alt="Producto 1"
-              className="w-full h-48 object-cover rounded-t-lg"
-            />
-            <h3 className="mt-4 font-semibold">Camiseta Premium</h3>
-            <p className="text-gray-600">$20.00</p>
-            <button className="mt-4 bg-yellow-500 hover:bg-yellow-600 text-white py-2 px-4 rounded">
-              Ver Producto
-            </button>
+        {/* Contenedores de características */}
+        <section className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
+          {[...Array(3)].map((_, i) => (
+            <div
+              key={i}
+              className="bg-gray-900 border-2 border-yellow-500 rounded-lg p-6 hover:shadow-xl hover:border-cyan-400 transition-transform transform hover:scale-105"
+            >
+              <h2 className="text-2xl text-yellow-500 font-bold mb-4">
+                Característica {i + 1}
+              </h2>
+              <p className="text-gray-400">
+                Breve descripción de esta sección futurista. Adaptada a la
+                estética de Cyberpunk.
+              </p>
+            </div>
+          ))}
+        </section>
+
+        {/* Apartado para productos destacados */}
+        <section>
+          <h2 className="text-3xl font-bold text-center text-yellow-500 mb-8">
+            Productos Destacados
+          </h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+            {[...Array(4)].map((_, i) => (
+              <div
+                key={i}
+                className="bg-gray-800 border border-cyan-400 rounded-lg p-4 hover:shadow-lg transition-transform transform hover:scale-105"
+              >
+                <img
+                  src={`/assets/producto${i + 1}.jpg`}
+                  alt={`Producto ${i + 1}`}
+                  className="w-full h-48 object-cover rounded-lg mb-4"
+                />
+                <h3 className="text-lg font-semibold text-yellow-400">
+                  Producto {i + 1}
+                </h3>
+                <p className="text-gray-400">$XX.XX</p>
+                <button className="mt-4 w-full bg-cyan-400 hover:bg-cyan-500 text-black font-bold py-2 px-4 rounded">
+                  Ver Producto
+                </button>
+              </div>
+            ))}
           </div>
-          {/* Producto 2 */}
-          <div className="bg-gray-100 rounded-lg shadow-lg hover:shadow-2xl p-4 text-center">
-            <img
-              src="/assets/producto2.jpg"
-              alt="Producto 2"
-              className="w-full h-48 object-cover rounded-t-lg"
-            />
-            <h3 className="mt-4 font-semibold">Sudadera Unisex</h3>
-            <p className="text-gray-600">$35.00</p>
-            <button className="mt-4 bg-yellow-500 hover:bg-yellow-600 text-white py-2 px-4 rounded">
-              Ver Producto
-            </button>
-          </div>
-        </div>
-      </section>
+        </section>
+      </main>
 
       {/* Footer */}
-      <footer className="bg-gray-800 text-white py-6">
+      <footer className="bg-gray-900 text-gray-400 py-8 border-t border-yellow-500">
         <div className="text-center">
-          <p>&copy; 2024 Tienda de Ropa. Todos los derechos reservados.</p>
-          <p>
-            <a href="/about" className="text-yellow-400 hover:underline">
+          <p>&copy; 2024 Cyberpunk Store. Todos los derechos reservados.</p>
+          <p className="mt-2">
+            <a
+              href="/about"
+              className="text-cyan-400 hover:text-yellow-500 transition"
+            >
               Acerca de
             </a>{" "}
             |{" "}
-            <a href="/contact" className="text-yellow-400 hover:underline">
+            <a
+              href="/contact"
+              className="text-cyan-400 hover:text-yellow-500 transition"
+            >
               Contacto
             </a>{" "}
             |{" "}
-            <a href="/terms" className="text-yellow-400 hover:underline">
+            <a
+              href="/terms"
+              className="text-cyan-400 hover:text-yellow-500 transition"
+            >
               Términos
             </a>
           </p>
