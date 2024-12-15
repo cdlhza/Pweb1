@@ -2,11 +2,7 @@ function HomePage() {
   return (
     <div className="bg-black text-gray-300 min-h-screen">
       {/* Encabezado principal */}
-      <header
-        className="relative bg-cover bg-center h-screen border-b-4 border-yellow-500"
-        style={{ backgroundImage: "url('/assets/cyberpunk-banner.jpg')" }}
-      >
-        <div className="absolute inset-0 bg-gradient-to-b from-black via-transparent to-black opacity-90"></div>
+      <header className="relative h-96 border-b-4 border-yellow-500 bg-black">
         <div className="relative z-10 flex flex-col items-center justify-center h-full text-center">
           <h1 className="text-6xl md:text-8xl font-bold text-yellow-500 mb-4">
             Bienvenido al Futuro
