@@ -1,11 +1,11 @@
-import PropTypes from 'prop-types';
-import { useProducts } from '../context/ProductContext';
-import { Link } from 'react-router-dom';
-import { IoTrashBinSharp, IoPencilSharp } from 'react-icons/io5';
+import PropTypes from "prop-types";
+import { useProducts } from "../context/ProductContext";
+import { Link } from "react-router-dom";
+import { IoTrashBinSharp, IoPencilSharp } from "react-icons/io5";
 
 function ProductCard({ product }) {
   const { deletProduct } = useProducts();
-  const server = 'http://localhost:4000/img/';
+  const server = "http://localhost:4000/img/";
 
   return (
     <div className="bg-zinc-800 max-w-sm w-full p-5 rounded-sm shadow-md">
@@ -35,26 +35,43 @@ function ProductCard({ product }) {
         />
       </div>
 
-      <div className="flex justify-between text-slate-300">
+      <div className="text-slate-300 space-y-2">
         <p>
           <span className="font-semibold">Precio: </span>${product.price}
         </p>
         <p>
-          <span className="font-semibold">Año: </span>{product.year}
+          <span className="font-semibold">Cantidad: </span>
+          {product.quantity}
+        </p>
+        <p>
+          <span className="font-semibold">Color: </span>
+          {product.color}
+        </p>
+
+        <p>
+          <span className="font-semibold">Tallas: </span>
+          {product.sizes ? product.sizes.join(", ") : "No especificado"}
+        </p>
+        <p>
+          <span className="font-semibold">Informacion: </span>
+          {product.info}
         </p>
       </div>
     </div>
   );
 }
 
-export default ProductCard;
-
 ProductCard.propTypes = {
   product: PropTypes.shape({
     _id: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
     price: PropTypes.number.isRequired,
-    year: PropTypes.number.isRequired,
+    quantity: PropTypes.number.isRequired,
+    info: PropTypes.string.isRequired,
+    color: PropTypes.string.isRequired,
+    sizes: PropTypes.arrayOf(PropTypes.string).isRequired,
     image: PropTypes.string.isRequired,
   }).isRequired,
 };
+
+export default ProductCard;

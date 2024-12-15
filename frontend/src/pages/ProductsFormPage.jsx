@@ -20,6 +20,7 @@ function ProductsFormPage() {
       quantity: 1,
       color: "Azul", // Color predeterminado
       sizes: ["S", "M", "L"], // Tamaños predeterminados
+      info: "",
       image: uploadIcon,
     },
   });
@@ -46,6 +47,7 @@ function ProductsFormPage() {
         setValue("color", product.color);
         setValue("sizes", product.sizes);
         setValue("image", product.image);
+        setValue("info", product.info);
         setSelectedImage(server + product.image);
       }
     }
@@ -60,6 +62,7 @@ function ProductsFormPage() {
     formData.append("quantity", data.quantity); // Cantidad del producto
     formData.append("color", data.color); // Color del producto
     formData.append("sizes", data.sizes); // Tamaños seleccionados
+    formData.append("info", data.info); // Información adicional del producto
     formData.append("image", data.image); // Imagen del producto
     try {
       if (params.id) {
@@ -72,6 +75,7 @@ function ProductsFormPage() {
             quantity: data.quantity.toString(),
             color: data.color,
             image: data.image,
+            info: data.info,
             sizes: data.sizes.toString([]),
           };
           await updateProductNoUpdateImage(params.id, updateData); // Espera la actualización
@@ -171,8 +175,22 @@ function ProductsFormPage() {
             </div>
           ))}
         </div>
+        <label htmlFor="info">Informacion</label>
+        <input
+          type="text"
+          className="w-full bg-zinc-700 text-white px-4 py-2 rounded-md my-2"
+          placeholder="Infrmacion del producto"
+          {...register("info", { required: "La informacion es requerida" })}
+          autoFocus
+        />
+        {errors.name && (
+          <div className="text-red-500">{errors.name.message}</div>
+        )}
         {errors.sizes && (
           <div className="text-red-500">{errors.sizes.message}</div>
+        )}
+        {errors.info && (
+          <div className="text-red-500">{errors.info.message}</div>
         )}
 
         <div className="py-2 my-2">

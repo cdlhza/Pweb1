@@ -23,11 +23,14 @@ export const createProduct = async (req, res) => {
         message: ["Error al crear un producto, no se encontro la imagen"],
       });
     }
-    const { name, price, year } = req.body;
+    const { name, price, quantity, color, sizes, info } = req.body;
     const newProduct = new Products({
       name,
       price,
-      year,
+      quantity,
+      color,
+      sizes,
+      info,
       image: req.file.filename,
       user: req.user.id,
     });
@@ -90,7 +93,7 @@ export const deleteProduct = async (req, res) => {
 export const editProduct = async (req, res) => {
   try {
     const { id } = req.params; // ID del producto a actualizar
-    const { name, price, year } = req.body; // Datos del producto enviados en el cuerpo de la solicitud
+    const { name, price, quantity, color, sizes, info } = req.body; // Datos del producto enviados en el cuerpo de la solicitud
     let updatedImage;
 
     // Verifica si se ha enviado una nueva imagen
@@ -118,7 +121,10 @@ export const editProduct = async (req, res) => {
     const updatedData = {
       name,
       price,
-      year,
+      quantity,
+      color,
+      sizes,
+      info,
       ...(updatedImage && { image: updatedImage }), // Solo incluye la imagen si hay una nueva
     };
 
@@ -143,7 +149,10 @@ export const updateProductNoUpdateImage = async (req, res) => {
     const data = {
       name: req.body.name,
       price: req.body.price,
-      year: req.body.year,
+      quantity: req.body.quantity,
+      color: req.body.color,
+      sizes: req.body.sizes,
+      info: req.body.info,
       image: req.body.image,
       user: req.user.id,
     };

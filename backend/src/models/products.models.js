@@ -21,6 +21,10 @@ const productsSchema = new mongoose.Schema(
       type: String,
       required: true, // Nueva propiedad
     },
+    info: {
+      type: String,
+      required: true, // Nueva propiedad
+    },
     sizes: {
       type: [String], // Nueva propiedad: Arreglo de tallas (Ejemplo: ["S", "M", "L"])
       required: true,
